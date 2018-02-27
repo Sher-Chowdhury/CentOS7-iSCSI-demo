@@ -42,7 +42,7 @@ Vagrant.configure(2) do |config|
     end
 
     iSCSI_target_server_config.vm.provision "shell", path: "scripts/install-rpms.sh", privileged: true
-#    iSCSI_target_server_config.vm.provision "shell", path: "scripts/setup-iSCSI-target.sh", privileged: true
+    iSCSI_target_server_config.vm.provision "shell", path: "scripts/setup-iSCSI-target.sh", privileged: true
 
   end
 
@@ -60,7 +60,7 @@ Vagrant.configure(2) do |config|
     end
 
     iSCSI_initiator_config.vm.provision "shell", path: "scripts/install-rpms.sh", privileged: true
-#    iSCSI_initiator_config.vm.provision "shell", path: "scripts/setup-iSCSI-initiator.sh", privileged: true
+    iSCSI_initiator_config.vm.provision "shell", path: "scripts/setup-iSCSI-initiator.sh", privileged: true
   end
 
 end
