@@ -19,7 +19,7 @@ end
 
 Vagrant.configure(2) do |config|
   config.vm.define "iSCSI_target_server" do |iSCSI_target_server_config|
-    iSCSI_target_server_config.vm.box = "centos/7"
+    iSCSI_target_server_config.vm.box = "bento/centos-7.4"
     iSCSI_target_server_config.vm.hostname = "target.cb.net"
 
 
@@ -36,18 +36,19 @@ Vagrant.configure(2) do |config|
       file_to_disk = './tmp/large_disk.vdi'
       vb.customize ['createhd', '--filename', file_to_disk, '--size', 2 * 1024]
       # https://github.com/kusnier/vagrant-persistent-storage/issues/33
-      vb.customize ['storageattach', :id, '--storagectl', 'IDE', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+      # vb.customize ['storageattach', :id, '--storagectl', 'IDE', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
       # for bento use following line:
-      #vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+      vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
     end
 
     iSCSI_target_server_config.vm.provision "shell", path: "scripts/install-rpms.sh", privileged: true
-    iSCSI_target_server_config.vm.provision "shell", path: "scripts/setup-iSCSI-target.sh", privileged: true
+#    iSCSI_target_server_config.vm.provision "shell", path: "scripts/setup-iSCSI-target.sh", privileged: true
 
   end
 
   config.vm.define "iSCSI_initiator" do |iSCSI_initiator_config|
-    iSCSI_initiator_config.vm.box = "centos/7"
+    #iSCSI_initiator_config.vm.box = "centos/7"
+    iSCSI_initiator_config.vm.box = "bento/centos-7.4"
     iSCSI_initiator_config.vm.hostname = "initiator.cb.net"
     iSCSI_initiator_config.vm.network "private_network", ip: "192.168.14.101", :netmask => "255.255.255.0", virtualbox__intnet: "intnet1"
 
@@ -59,7 +60,7 @@ Vagrant.configure(2) do |config|
     end
 
     iSCSI_initiator_config.vm.provision "shell", path: "scripts/install-rpms.sh", privileged: true
-    iSCSI_initiator_config.vm.provision "shell", path: "scripts/setup-iSCSI-initiator.sh", privileged: true
+#    iSCSI_initiator_config.vm.provision "shell", path: "scripts/setup-iSCSI-initiator.sh", privileged: true
   end
 
 end
