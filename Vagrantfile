@@ -62,13 +62,4 @@ Vagrant.configure(2) do |config|
     iSCSI_initiator_config.vm.provision "shell", path: "scripts/setup-iSCSI-initiator.sh", privileged: true
   end
 
-  # this line relates to the vagrant-hosts plugin, https://github.com/oscar-stack/vagrant-hosts
-  # it adds entry to the /etc/hosts file. 
-  # this block is placed outside the define blocks so that it gts applied to all VMs that are defined in this vagrantfile. 
-  config.vm.provision :hosts do |provisioner|
-    provisioner.add_host '192.168.14.100', ['iscsi-target.codingbee.net']  
-    provisioner.add_host '192.168.14.101', ['iscsi-initiator.codingbee.net']
-  end
-
-
 end
