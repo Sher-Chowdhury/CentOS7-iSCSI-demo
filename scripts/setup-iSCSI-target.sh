@@ -19,8 +19,6 @@ create /backstores/block/BD1
 cd /iscsi/iqn.2018-02.net.cb.target:fqdn/tpg1/acls
 create iqn.2018-02.net.cb.target:client
 cd /iscsi/iqn.2018-02.net.cb.target:fqdn/tpg1/acls/iqn.2018-02.net.cb.target:client/
-set auth userid=codingbee
-set auth userid=password
 exit
 EOF
 
