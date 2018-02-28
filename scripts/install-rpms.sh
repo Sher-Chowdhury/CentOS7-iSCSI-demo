@@ -13,4 +13,5 @@ yum install -y man-pages
 #yum install -y tree
 #yum install -y nc
 #yum install -y git
+yum install -y htop
 yum install -y bash-completion-extras 
