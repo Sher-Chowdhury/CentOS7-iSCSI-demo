@@ -19,7 +19,7 @@ end
 
 Vagrant.configure(2) do |config|
   config.vm.define "iSCSI_target_server" do |iSCSI_target_server_config|
-    iSCSI_target_server_config.vm.box = "bento/centos-7.4"
+    iSCSI_target_server_config.vm.box = "bento/centos-7.5"
     iSCSI_target_server_config.vm.hostname = "target.cb.net"
 
 
@@ -48,7 +48,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "iSCSI_initiator" do |iSCSI_initiator_config|
     #iSCSI_initiator_config.vm.box = "centos/7"
-    iSCSI_initiator_config.vm.box = "bento/centos-7.4"
+    iSCSI_initiator_config.vm.box = "bento/centos-7.5"
     iSCSI_initiator_config.vm.hostname = "initiator.cb.net"
     iSCSI_initiator_config.vm.network "private_network", ip: "192.168.14.101", :netmask => "255.255.255.0", virtualbox__intnet: "intnet1"
 
